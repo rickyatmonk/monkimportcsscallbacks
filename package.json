@@ -1,0 +1,22 @@
+{
+  "name": "monkimportcsscallbacks",
+  "version": "1.0.0",
+  "description": "This callback is used to register the formats availabe in the 'Format' select \nlist the way we want them. By default, tinymce applies classes to 'span' tags that \nit either wraps or inserts into the active WYSIWYG element. We want to apply our class \ntags directly to the active element. That is accomplished by using this \n'importcss_selector_converter' callback which overrides the default way that tinymce \ngenerates the formats.\n\nThe limitation is that block level elements still do not behave as expected when a class is \napplied while the block level element is the active \nelement in the WYSIWYG editor.",
+  "main": "none",
+  "scripts": {
+    "test": "none"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/MonkDev/mcms.git"
+  },
+  "author": "MonkDev",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/MonkDev/mcms/issues"
+  },
+  "dependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.2"
+  }
+}
