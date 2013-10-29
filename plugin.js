@@ -1,14 +1,20 @@
-/**
- * monkimportcsscallbacks - This callback is used to register the formats availabe in the 
- * 'Format' select list the way we want them. By default, tinymce applies classes to 'span'
- * tags that it either wraps or inserts into the active WYSIWYG element. We want to apply
- * our class tags directly to the active element. That is accomplished by using this 
- * 'importcss_selector_converter' callback which overrides the default way that tinymce
- * generates the formats.
- *
- * The limitation is that block level elements still do not behave as expected when a class
- * is applied while the block level element is the active element in the WYSIWYG editor.
- */
+/*! 
+monkimportcsscallbacks
+@version: 1.0.0
+@date: 29-10-2013
+@author: MonkDev
+
+This callback is used to register the formats availabe in the 'Format' select 
+list the way we want them. By default, tinymce applies classes to 'span' tags that 
+it either wraps or inserts into the active WYSIWYG element. We want to apply our class 
+tags directly to the active element. That is accomplished by using this 
+'importcss_selector_converter' callback which overrides the default way that tinymce 
+generates the formats.
+
+The limitation is that block level elements still do not behave as expected when a class is 
+applied while the block level element is the active 
+element in the WYSIWYG editor.
+*/
 tinymce.PluginManager.add('monkimportcsscallbacks', function (editor) {
   editor.settings.importcss_selector_converter = function (selectorText) {
     var format;
