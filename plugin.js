@@ -11,47 +11,23 @@
  */
 tinymce.PluginManager.add('monkimportcsscallbacks', function (editor) {
   editor.settings.importcss_selector_converter = function (selectorText) {
-  
     var format;
-    var textBlockElements = ['h1','h2','h3','h4','h5','h6','p','div','address','pre','form','blockquote','center','dir','fieldset','header','footer','article','section','hgroup','aside','nav','figure'];
-    var blockElements = ['hr','table','tbody','thead','tfoot','th','tr','td','li','ol','ul','caption','dl','dt','dd','noscript','menu','isindex','samp','option','datalist','select','optgroup'];
 
-    // Parse simple element.class1, .class1
+    // Leverage importcss' function for generating formats based on the selector text.
+    format = this.convertSelectorToFormat(selectorText);
+
+    // Parse the selector text (e.g. element.class1, .class1).
     var selector = /^(?:([a-z0-9\-_]+))?(\.[a-z0-9_\-\.]+)$/i.exec(selectorText);
     if (!selector) {
       return;
-    }
+    }    
 
-    var elementName = selector[1];
-    var classes = selector[2].substr(1).split('.').join(' ');
-
-    // element.class - Produce block formats
-    if (selector[1]) {
-    format = {
-      title: selectorText
-    };
-
-    if (textBlockElements[elementName]) {
-      // Text block format ex: h1.class1
-      format.block = elementName;
-    } else if (blockElements[elementName]) {
-      // Non text block format ex: tr.row
-      format.selector = elementName;
-    } else {
-      // Inline format strong.class1
-      format.inline = elementName;
-    }
-    } else if (selector[2]) {
-
-        format = {
-          selector: 'div,p,h1,h2,h3,h4,h5,h6,td,th,li,img,a,span',
-          title: selectorText.substr(1),
-          classes: classes
-        };
-
+    // If the class has no html element prefix, then make it available for many elements.
+    if (!selector[1] && selector[2]) {
+      format.selector = 'div,p,h1,h2,h3,h4,h5,h6,td,th,li,img,a,span';
+      delete format.inline;
     }
 
     return format;
-
   };
 });
